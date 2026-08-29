@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muthu Shravan Sundaram — Mechanical Design Engineer</title>
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --navy:    #0D1B2A;
+    --navy2:   #1A2E42;
+    --teal:    #008080;
+    --teal-lt: #00BFBF;
+    --white:   #F4F8FC;
+    --gray:    #8A9BB0;
+    --border:  #1E3248;
+    --accent:  #E05C3A;
+    --mono:    'Courier New', Courier, monospace;
+    --sans:    'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(20px,5vw,80px);
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--teal-lt);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── SECTIONS ── */
+  section { padding: clamp(60px,8vw,100px) clamp(20px,5vw,80px); }
+  .max-w { max-width: 1100px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 100px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+  .hero-stat {
+    display: inline-block;
+    background: var(--navy2);
+    border: 1px solid var(--teal);
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin-bottom: 32px;
+  }
+  .stat-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--teal-lt);
+    font-family: var(--mono);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal-lt);
+    border: 1px solid var(--teal);
+    border-radius: 3px;
+    padding: 4px 10px;
+    letter-spacing: 0.05em;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal-lt); color: var(--navy); }
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--gray);
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--white); }
+
+  /* Hero image placeholder */
+  .hero-image {
+    background: var(--navy2);
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    aspect-ratio: 4/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 13px;
+    text-align: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+  .hero-image svg { opacity: 0.3; }
+
+  /* ── SPEC SHEET (ABOUT) ── */
+  #about { border-bottom: 1px solid var(--border); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .about-bio {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  /* Datasheet */
+  .datasheet {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .datasheet-header {
+    background: var(--border);
+    padding: 10px 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal-lt);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .datasheet-row {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .datasheet-row:last-child { border-bottom: none; }
+  .ds-key {
+    padding: 10px 16px;
+    color: var(--gray);
+    font-family: var(--mono);
+    font-size: 12px;
+    width: 45%;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .ds-val {
+    padding: 10px 16px;
+    color: var(--white);
+    font-size: 13px;
+  }
+  .ds-val.teal { color: var(--teal-lt); }
+
+  /* ── PROJECTS ── */
+  #projects { border-bottom: 1px solid var(--border); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .project-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-3px);
+  }
+  /* Image placeholder */
+  .project-img {
+    background: var(--border);
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 12px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    gap: 10px;
+    position: relative;
+  }
+  .project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+  }
+  .project-img-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .project-body { padding: 20px; }
+  .project-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .project-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ptag {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--gray);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+  .highlight-card {
+    border-color: var(--teal);
+    grid-column: span 2;
+  }
+  .highlight-card .project-img { height: 260px; }
+
+  /* ── SKILLS ── */
+  #skills { border-bottom: 1px solid var(--border); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .skill-group {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--white);
+  }
+  .skill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── PUBLICATIONS ── */
+  #publications { border-bottom: 1px solid var(--border); }
+  .pub-list { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .pub-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .pub-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--navy);
+    background: var(--teal);
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pub-badge.award { background: var(--accent); }
+  .pub-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .pub-meta { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  #contact {
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; margin-bottom: 16px; }
+  .contact-sub { color: var(--gray); margin-bottom: 40px; font-size: 15px; }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px clamp(20px,5vw,80px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-image { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .highlight-card { grid-column: span 1; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MSS_portfolio.v2</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner max-w">
+    <div>
+      <p class="hero-eyebrow">// Mechanical Design Engineer</p>
+      <h1 class="hero-name">Muthu Shravan<br>Sundaram</h1>
+      <p class="hero-title">MSc BioMechanical Design · TU Delft · Class of 2026</p>
+
+      <div class="hero-stat">
+        <div class="stat-number">214°</div>
+        <div class="stat-label">Active articulation — validated prototype</div>
+      </div>
+
+      <div class="hero-tags">
+        <span class="tag">Medical Devices</span>
+        <span class="tag">Precision Mechanisms</span>
+        <span class="tag">Robotics</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">COMSOL FEM</span>
+        <span class="tag">Open to Work</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="YOUR_CV_LINK_HERE" class="btn-ghost" target="_blank">Download CV</a>
+        <a href="https://tinyurl.com/Muthu-Portfolio" class="btn-ghost" target="_blank">Portfolio PDF</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <span class="hero-image-label">hero_image.jpg</span>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21,15 16,10 5,21"/>
+      </svg>
+      <span>Replace with your photo<br>or device image</span>
+      <!-- TO ADD YOUR IMAGE:
+           Remove everything inside this div except the img tag below
+           and replace src with your image file name -->
+      <!-- <img src="your-photo.jpg" alt="Muthu Shravan Sundaram"> -->
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w about-grid">
+    <div>
+      <p class="section-eyebrow">// About</p>
+      <h2 class="section-title">Engineering from<br>first principles</h2>
+      <p class="about-bio">
+        I graduated in August 2026 with an MSc in Mechanical Engineering (BioMechanical Design)
+        from TU Delft, achieving a thesis grade of 9/10. My work sits at the intersection of
+        precision mechanism design, medical devices, and hands-on prototype development.
+      </p>
+      <p class="about-bio">
+        My thesis produced a fully functional, affordable, modular flexible colonoscope —
+        fabricated from commercial off-the-shelf components and additive manufacturing,
+        validated at a fraction of the cost of commercial systems. I also hold a BTech in
+        Mechanical Engineering with Honours from IIITDM Kancheepuram (CGPA 9.49/10,
+        Institute Gold Medal), and have three publications including an IEEE OCEANS paper.
+      </p>
+      <p class="about-bio">
+        I am actively looking for roles in medtech, precision engineering, robotics, and
+        high-tech systems across Europe and beyond.
+      </p>
+      <div class="hero-cta" style="margin-top:8px">
+        <a href="https://www.linkedin.com/in/muthu-shravan-sundaram/" class="btn-ghost" target="_blank">LinkedIn</a>
+        <a href="mailto:shravanmuthu1809@gmail.com" class="btn-primary">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="datasheet">
+      <div class="datasheet-header">SPEC_SHEET — Engineer Profile</div>
+      <div class="datasheet-row">
+        <div class="ds-key">DEGREE</div>
+        <div class="ds-val">MSc Mechanical Engineering</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">TRACK</div>
+        <div class="ds-val">BioMechanical Design</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">INSTITUTION</div>
+        <div class="ds-val">TU Delft</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">THESIS GRADE</div>
+        <div class="ds-val teal">9 / 10</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">LOCATION</div>
+        <div class="ds-val">Rijswijk, Netherlands</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">AVAILABILITY</div>
+        <div class="ds-val teal">Immediate</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">OPEN TO</div>
+        <div class="ds-val">Europe + USA (visa sponsorship)</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">PUBLICATIONS</div>
+        <div class="ds-val teal">3 (incl. IEEE OCEANS)</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">UNDERGRAD GPA</div>
+        <div class="ds-val">9.49 / 10 · Gold Medal</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">PRIMARY CAD</div>
+        <div class="ds-val">SolidWorks · Fusion 360</div>
+      </div>
+      <div class="datasheet-row">
+        <div class="ds-key">SIMULATION</div>
+        <div class="ds-val">COMSOL Multiphysics · ANSYS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <p class="section-eyebrow">// Projects</p>
+    <h2 class="section-title">From concept to validated prototype</h2>
+
+    <div class="projects-grid">
+
+      <!-- HIGHLIGHT: THESIS -->
+      <div class="project-card highlight-card">
+        <div class="project-img">
+          <span class="project-img-label">endoscope_device.jpg</span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span style="font-size:11px;color:#8A9BB0">Replace with device photo</span>
+          <!-- <img src="endoscope.jpg" alt="Flexible Endoscope"> -->
+        </div>
+        <div class="project-body">
+          <p class="project-type">// MSc Thesis · TU Delft · Grade 9/10</p>
+          <h3 class="project-title">Affordable, Modular, Flexible Endoscope System</h3>
+          <p class="project-desc">
+            Full mechanical development of a modular flexible colonoscope for low-resource clinical settings.
+            Designed the internal architecture in SolidWorks to integrate a tendon-driven four-way bending section,
+            fluidic routing (suction, irrigation, insufflation), and a modular handle-cassette assembly within a
+            compact 419g prototype. Fabricated from commercial off-the-shelf components and additive manufacturing.
+            Validated articulation exceeding <strong style="color:#00BFBF">210° in all four steering planes</strong>
+            (peak: 214°) across repeated test cycles. Built at a fraction of the cost of commercial systems.
+          </p>
+          <div class="project-tags">
+            <span class="ptag">SolidWorks</span>
+            <span class="ptag">DFMEA</span>
+            <span class="ptag">DfM/DfA</span>
+            <span class="ptag">Prototype Fabrication</span>
+            <span class="ptag">Functional Validation</span>
+            <span class="ptag">Fluidic Systems</span>
+            <span class="ptag">ISO 13485</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESA -->
+      <div class="project-card">
+        <div class="project-img">
+          <span class="project-img-label">esa_joint.jpg</span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span style="font-size:11px;color:#8A9BB0">Replace with ESA project image</span>
+          <!-- <img src="esa-joint.jpg" alt="ESA Compliant Joint"> -->
+        </div>
+        <div class="project-body">
+          <p class="project-type">// Precision Mechanism Design · ESA</p>
+          <h3 class="project-title">Compliant Planar Joint — ESA Microvibration Isolation</h3>
+          <p class="project-desc">
+            MATLAB-based constrained optimisation of folded leaf spring geometry for a spacecraft hexapod.
+            Achieved near-zero stiffness in 3 planar DOF and maximum stiffness in 3 constrained directions
+            under strict mass and height limits. COMSOL FEM validation across 6 degrees of freedom.
+          </p>
+          <div class="project-tags">
+            <span class="ptag">COMSOL FEM</span>
+            <span class="ptag">MATLAB Optimisation</span>
+            <span class="ptag">SolidWorks</span>
+            <span class="ptag">Compliant Mechanisms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RAIS -->
+      <div class="project-card">
+        <div class="project-img">
+          <span class="project-img-label">rais_device.jpg</span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span style="font-size:11px;color:#8A9BB0">Replace with RAIS image</span>
+          <!-- <img src="rais.jpg" alt="RAIS Device"> -->
+        </div>
+        <div class="project-body">
+          <p class="project-type">// Surgical Instrument Design</p>
+          <h3 class="project-title">Steerable Pen Camera — RAIS Surgical Device</h3>
+          <p class="project-desc">
+            Designed a miniaturised steerable pen camera attachment for gasless laparoscopic surgery in
+            low/middle-income countries. Miniaturised kinematic linkages within surgical constraints,
+            optimised for additive manufacturing. Assembled and validated integration with surgical retractor hardware.
+          </p>
+          <div class="project-tags">
+            <span class="ptag">SolidWorks</span>
+            <span class="ptag">Kinematic Linkages</span>
+            <span class="ptag">3D Printing</span>
+            <span class="ptag">Surgical Devices</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUV -->
+      <div class="project-card">
+        <div class="project-img">
+          <span class="project-img-label">auv_vehicle.jpg</span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span style="font-size:11px;color:#8A9BB0">Replace with AUV image</span>
+          <!-- <img src="auv.jpg" alt="AUV"> -->
+        </div>
+        <div class="project-body">
+          <p class="project-type">// Underwater Robotics · MATE ROV World Championship</p>
+          <h3 class="project-title">Autonomous Underwater Vehicle</h3>
+          <p class="project-desc">
+            Led a 12-member team in mechanical design, structural analysis, and fabrication of an AUV for the
+            MATE ROV World Championship and SAUVC Singapore. Managed external fabricators, production drawings,
+            technical budget, and competition timeline.
+          </p>
+          <div class="project-tags">
+            <span class="ptag">Mechanical Design</span>
+            <span class="ptag">Structural Analysis</span>
+            <span class="ptag">2D Manufacturing Drawings</span>
+            <span class="ptag">Team Leadership</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEEDING ROBOT -->
+      <div class="project-card">
+        <div class="project-img">
+          <span class="project-img-label">feeding_robot.jpg</span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span style="font-size:11px;color:#8A9BB0">Replace with robot CAD image</span>
+          <!-- <img src="feeding-robot.jpg" alt="Feeding Robot"> -->
+        </div>
+        <div class="project-body">
+          <p class="project-type">// Assistive Robotics · Mechatronics</p>
+          <h3 class="project-title">Assistive Feeding Robot for MS Patients</h3>
+          <p class="project-desc">
+            3-DOF telescopic arm with Maxon BLDC motors for Multiple Sclerosis patients. Dual-stage tremor
+            damping: passive viscous damping + adaptive PID/notch filter. Full CAD architecture and
+            mechatronic control block diagram enabling seamless mode switching.
+          </p>
+          <div class="project-tags">
+            <span class="ptag">SolidWorks</span>
+            <span class="ptag">Mechatronics</span>
+            <span class="ptag">MATLAB Control</span>
+            <span class="ptag">Biomechanics</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <p class="section-eyebrow">// Skills</p>
+    <h2 class="section-title">Technical toolkit</h2>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <p class="skill-group-title">CAD &amp; Simulation</p>
+        <div class="skill-item"><span class="skill-dot"></span>SolidWorks</div>
+        <div class="skill-item"><span class="skill-dot"></span>Fusion 360</div>
+        <div class="skill-item"><span class="skill-dot"></span>COMSOL Multiphysics (FEA)</div>
+        <div class="skill-item"><span class="skill-dot"></span>ANSYS</div>
+        <div class="skill-item"><span class="skill-dot"></span>MATLAB</div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Design Engineering</p>
+        <div class="skill-item"><span class="skill-dot"></span>DfM / DfA</div>
+        <div class="skill-item"><span class="skill-dot"></span>DFMEA</div>
+        <div class="skill-item"><span class="skill-dot"></span>BOM Development</div>
+        <div class="skill-item"><span class="skill-dot"></span>Tolerance Analysis / GD&amp;T</div>
+        <div class="skill-item"><span class="skill-dot"></span>Rapid Prototyping</div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Medical Devices</p>
+        <div class="skill-item"><span class="skill-dot"></span>Medical Device Design</div>
+        <div class="skill-item"><span class="skill-dot"></span>ISO 13485 (familiarity)</div>
+        <div class="skill-item"><span class="skill-dot"></span>ISO 14971 (familiarity)</div>
+        <div class="skill-item"><span class="skill-dot"></span>Clinical Workflow Analysis</div>
+        <div class="skill-item"><span class="skill-dot"></span>Fluidic Systems</div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Biomechanics</p>
+        <div class="skill-item"><span class="skill-dot"></span>Musculoskeletal Modelling</div>
+        <div class="skill-item"><span class="skill-dot"></span>Multibody Dynamics</div>
+        <div class="skill-item"><span class="skill-dot"></span>Neuromechanics</div>
+        <div class="skill-item"><span class="skill-dot"></span>Biomechatronics</div>
+        <div class="skill-item"><span class="skill-dot"></span>Gait Analysis</div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Programming</p>
+        <div class="skill-item"><span class="skill-dot"></span>Python</div>
+        <div class="skill-item"><span class="skill-dot"></span>MATLAB</div>
+        <div class="skill-item"><span class="skill-dot"></span>C / C++</div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Languages</p>
+        <div class="skill-item"><span class="skill-dot"></span>English (C1)</div>
+        <div class="skill-item"><span class="skill-dot"></span>Tamil (native)</div>
+        <div class="skill-item"><span class="skill-dot"></span>Dutch (learning)</div>
+        <div class="skill-item"><span class="skill-dot"></span>German (elementary)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="max-w">
+    <p class="section-eyebrow">// Publications</p>
+    <h2 class="section-title">Research output</h2>
+    <div class="pub-list">
+
+      <div class="pub-card">
+        <span class="pub-badge award">Best Paper</span>
+        <div>
+          <p class="pub-title">Acoustic Mixing of Co-flowing Inhomogeneous Fluids in a Circular Well Microchannel</p>
+          <p class="pub-meta">Sujith Jayakumar, <strong>Muthu Shravan Sundaram</strong>, Varun Kumar Rajendran, Karthick Subramani<br>
+          International Conference on Recent Advances in Fluid Mechanics and Nanoelectronics (ICRAFMN) · 2023 · Bangalore, India</p>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-badge">Oral Presentation</span>
+        <div>
+          <p class="pub-title">Mechanical Design, Analysis and Development of an AUV for SAUVC</p>
+          <p class="pub-meta">J R Sukesh, <strong>Muthu Shravan Sundaram</strong>, Vishnuvardhan Iyengar<br>
+          Singapore Autonomous Underwater Vehicle Challenge (SAUVC) Conference · 2022 · Singapore</p>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-badge">Published</span>
+        <div>
+          <p class="pub-title">Design and Performance Analysis of a Bio-Inspired Remotely Operated Robot (MATE ROV Explorer Challenge)</p>
+          <p class="pub-meta">J R Sukesh, R Dasyam, <strong>Muthu Shravan Sundaram</strong>, V Iyengar<br>
+          IEEE OCEANS · 2022 · Chennai, India</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow" style="text-align:center">// Contact</p>
+    <h2 class="contact-title">Let's work together</h2>
+    <p class="contact-sub">
+      I'm actively seeking roles in medtech, precision engineering, robotics, and high-tech systems.
+      Based in the Netherlands, open to relocation across Europe and the USA.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:shravanmuthu1809@gmail.com" class="btn-primary">shravanmuthu1809@gmail.com</a>
+      <a href="https://www.linkedin.com/in/muthu-shravan-sundaram/" class="btn-ghost" target="_blank">LinkedIn</a>
+      <a href="https://tinyurl.com/Muthu-Portfolio" class="btn-ghost" target="_blank">Portfolio PDF</a>
+      <a href="YOUR_CV_LINK_HERE" class="btn-ghost" target="_blank">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Muthu Shravan Sundaram · MSc Mechanical Engineering · TU Delft 2026</span>
+  <span style="color:var(--teal)">+31 06 17585933</span>
+</footer>
+
+</body>
+</html>
